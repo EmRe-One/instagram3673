@@ -1,15 +1,29 @@
 package tr.easolution.instagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+import com.parse.interceptors.ParseLogInterceptor;
+
 public class MainActivity extends AppCompatActivity {
+
+    /*
+    parse-dashboard
+        --appId instagram3673
+        --masterKey YPjse793Hfi53h4TpLsRioaKA
+        --serverURL "https://instagram3673.herokuapp.com/parse"
+        --appName Instagram
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,13 +32,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Parse.initialize(new Parse.Configuration.Builder(getApplicationContext())
+                .applicationId("instagram3673")
+                .clientKey(null)
+                .addNetworkInterceptor(new ParseLogInterceptor())
+                .server("https://instagram3673.herokuapp.com/parse/")   // '/' important after 'parse'
+                .build());
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        fab.setOnClickListener( (view) -> {
+
         });
     }
 
@@ -48,5 +65,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void login(View v){
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivityForResult(i, 0);
     }
 }
