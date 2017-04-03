@@ -17,10 +17,6 @@ import com.parse.interceptors.ParseLogInterceptor;
 
 public class MainActivity extends AppCompatActivity {
 
-    /*
-    parse-dashboard --appId instagram3673 --masterKey YPjse793Hfi53h4TpLsRioaKA --serverURL "https://instagram3673.herokuapp.com/parse" --appName Instagram
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
